@@ -13,7 +13,7 @@ router.get('/status/:status',access.grantAccess('readAny','Ticket'),validate(tic
 router.get('/:ticketId',access.grantAccess('readAny','Ticket'),validate(ticketParam.viewStatusById),ticketCtrl.viewStatusById)
 router.get('/passenger/:ticketId',access.grantAccess('readAny','Ticket'),validate(ticketParam.viewPassengerDetails),ticketCtrl.viewPassengerDetails)
 
-router.put('/update/:ticketId',access.grantAccess('UpdateAny','Ticket'),validate(ticketParam.updateTicket),ticketCtrl.updateTicket)
+router.put('/update/:ticketId',access.grantAccess('updateAny','Ticket'),validate(ticketParam.updateTicket),ticketCtrl.updateTicket)
 
 router.post('/reset',access.grantAccess('createAny','Ticket'),validate(ticketParam.resetAll),ticketCtrl.resetAll)
 

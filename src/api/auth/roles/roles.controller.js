@@ -7,7 +7,8 @@ function grantAccess (action, resource) {
     return async(req, res, next) => {
         try{
             const token = await req.headers['authorization'].split(' ')[1]
-            const permission = roles.can(jwtoken.getData(token).role)[action](resource)
+            const role = await jwtoken.getData(token).role
+            const permission = roles.can(role)[action](resource)
             if(!permission.granted){
                 throw new APIError("You dont have permission to perform this action")
             }
