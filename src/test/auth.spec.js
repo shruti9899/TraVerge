@@ -74,9 +74,3 @@ describe("Test Authentication", () => {
         })
     })
 })
-
-
-module.exports = {
-    Admintoken,
-    UserToken
-}

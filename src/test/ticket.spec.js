@@ -1,7 +1,9 @@
 var assert = require('assert');
 let chai = require('chai');
 let chaiHttp = require('chai-http');
+const user = require('../api/auth/user/user.model')
 require('./auth.spec')
+
 
 let server = require('../index');
 
@@ -128,5 +130,13 @@ describe("Ticket operations", () => {
               
                 done()
             })
+    })
+
+    after((done) => {
+        user.deleteMany({username: { $in :["TempUser","shrutishah.20199"]}})
+        .then(() => {
+            console.log("Users deleted successfully")
+            
+            done()})
     })
 })

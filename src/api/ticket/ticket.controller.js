@@ -85,7 +85,7 @@ async function resetAll (req, res, next){
 //to close ticket
 async function closeTickets (ticket){
     try{
-        await PassengerSchema.findOneAndDelete({_id: ticket.Passenger})
+        await PassengerSchema.deleteOne({_id: ticket.passenger})
         ticket.isBooked = false
         ticket.passenger = null
         await ticket.save()
