@@ -28,6 +28,7 @@ app.use(methodOverride())
 app.use(cors())
 app.use(helmet())
 
+app.get('/',(req,res) => { res.send({"home": "Welcome to TraVerge, Travel with HyperVerge"})} )
 //routing to apis
 app.use('/api', routes)
 
