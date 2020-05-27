@@ -6,8 +6,6 @@ let should = chai.should();
 chai.use(chaiHttp);
 
 const User = require('../api/auth/user/user.model')
-var Admintoken;
-var UserToken;
 
 
 
@@ -42,7 +40,6 @@ describe("Test Authentication", () => {
         .send(testAdmin)
         .end((err, result) => {
             result.should.have.status(200)
-            Admintoken = result.body.token
             console.log("Test Admin login successful")
             
             done()    
@@ -67,7 +64,6 @@ describe("Test Authentication", () => {
         .send(testUser)
         .end((err, result) => {
             result.should.have.status(200)
-            UserToken = result.body.token
             console.log("Test USer login successful")
 
             done()

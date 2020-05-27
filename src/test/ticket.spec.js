@@ -76,6 +76,18 @@ describe("Ticket operations", () => {
             done()
         })
     })
+
+    it("should not get all the open tickets because of unauthorized", (done) => {
+        chai.request(server)
+        .get('/api/tickets/status/false')
+        .end((err,result) => {
+            result.should.have.status(401)
+            
+            console.log("Got no result")
+            
+            done()
+        })
+    })
     
     it("should get all the closed tickets", (done) => {
         chai.request(server)
@@ -84,6 +96,17 @@ describe("Ticket operations", () => {
         .end((err,result) => {
             result.should.have.status(200)
             console.log("Got", result.body.length, " docs")
+            
+            done()
+        })
+    })
+
+    it("should not get all the closed tickets becuase of no authorization", (done) => {
+        chai.request(server)
+        .get('/api/tickets/status/true')
+        .end((err,result) => {
+            result.should.have.status(401)
+            console.log("Got error of unauthority")
             
             done()
         })
@@ -104,6 +127,19 @@ describe("Ticket operations", () => {
         })
     })
     
+    it("should not update the ticket because of unauthority", (done) => {
+        
+        chai.request(server)
+        .put('/api/tickets/update/'+ticketId)
+        .send(passenger)
+        .end((err, result) => {
+            result.should.have.status(401)
+            
+            console.log("Unable to update because of unauthority")
+            
+            done()
+        })
+    })
 
     it("should get passenger details of ticket", (done) => {
         chai.request(server)
@@ -120,6 +156,18 @@ describe("Ticket operations", () => {
             })
     })
 
+    it("should not get passenger details of ticket because of unauthority", (done) => {
+        chai.request(server)
+            .get('/api/tickets/passenger/'+ticketId)
+            .end((err, result) => {
+                result.should.have.status(401)
+
+                console.log("could not got the Passenger details as of unauthorized")
+
+                done()
+            })
+    })
+
     it("should reset all tickets", (done) => {
         chai.request(server)
             .post('/api/tickets/reset')
@@ -127,6 +175,18 @@ describe("Ticket operations", () => {
             .end((err, result) => {
                 result.should.have.status(200)
                 console.log(result.body)
+              
+                done()
+            })
+    })
+
+    it("should not reset all tickets", (done) => {
+        chai.request(server)
+            .post('/api/tickets/reset')
+            .set('Authorization',`Bearer ${UserToken}`)
+            .end((err, result) => {
+                result.should.have.status(500)
+                console.log("Could not reset because of unauthorization")
               
                 done()
             })
