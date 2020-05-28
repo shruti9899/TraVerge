@@ -12,6 +12,7 @@ Currently there are two roles:-
  - User/ Admin Sign up 
  - User/Admin Login
  - View Tickets baed on status (booked or unbooked)
+ - View Ticket's status based on TicketID
  - View Passenger details of any booked ticket
  - Update the Ticket status + add user details (if unbooked) / update the passenger details (if booked)
  - Reset all tickets (Only Admin)
